@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.client.ExpectedCount;
@@ -78,7 +79,7 @@ public class AtiperaDemoApiIntegrationTest {
                 .flatMap(List::stream).toList();
 
         // Assert
-        assertThat(exchange.getStatusCode()).isEqualTo(200);
+        assertThat(exchange.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
         assertThat(responseDTO).isNotNull();
         assertThat(responseDTO.getUsername()).isEqualTo(username);
         assertThat(responseDTO.getRepos()).hasSize(18);
