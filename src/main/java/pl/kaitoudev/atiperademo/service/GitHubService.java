@@ -69,7 +69,7 @@ public class GitHubService {
         if (onlyNonForks)
             repoDtos = getNonForkRepos(repoDtos);
 
-        Objects.requireNonNull(repoDtos).forEach(repoDto -> {
+        Objects.requireNonNull(repoDtos).stream().parallel().forEach(repoDto -> {
             List<GHBranchDTO> branches = getBranchesForRepo(username, repoDto.getRepoName());
             repoDto.addBranches(Objects.requireNonNull(branches));
         });
